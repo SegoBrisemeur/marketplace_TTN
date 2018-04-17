@@ -9,7 +9,7 @@ class Thing(models.Model):
     created_date = models.DateTimeField(
             default=timezone.now)
     edit_date = models.DateTimeField(
-            blank=True, null=True)
+            default=timezone.now)
 
     def edit(self):
         self.edit_date = timezone.now()
