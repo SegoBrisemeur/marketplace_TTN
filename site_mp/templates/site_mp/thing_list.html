@@ -1,21 +1,12 @@
-<html>
-    <head>
-        <title>The Things Network Marketplace</title>
-    </head>
+{% extends 'site_mp/base.html' %}
 
-    <body>
-	<div>
-		<h1>The Things Network Marketplace</h1> <br/>
-	</div>
-        <p>Welcome to the Marketplace ! </p>
-        <p>Do you want to post an announce ? </p>
-
-	{% for thing in things %}
-	<div>
-		<p><h2>Title: {{thing.title}}</h2>
-		{{thing.desc|linebreaksbr}}</p>
-	</div>
+	{% block content %}
+		{% for thing in things %}
+			<div class="post">
+			<h1> <a href="{% url 'thing_detail' pk=thing.pk %}"> {{thing.title}} </a> </h1>
+			<div class="date"> Last edit: {{thing.edit_date}} 
+			</div>
+			</div>
 		{% endfor %}
-    
-	</body>
-</html>
+	{% endblock %}
+
