@@ -4,10 +4,13 @@
     <div class="thing">
         {% if thing.edit_date %}
             <div class="date">
-                {{ thing.edit_date }}
+		Creation: {{thing.created_date}} <br>
+		Edit: {{ thing.edit_date }}
             </div>
         {% endif %}
+	<a class="btn btn-default" href="{% url 'thing_edit' pk=thing.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+
         <h1>{{ thing.title }}</h1>
-        <p>{{ thing.desc|linebreaksbr }}</p>
+        <p><b>Description: </b> {{ thing.desc|linebreaksbr }}</p>
     </div>
 {% endblock %}

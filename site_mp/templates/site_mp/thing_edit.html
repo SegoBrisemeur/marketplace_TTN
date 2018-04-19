@@ -1,0 +1,9 @@
+{% extends 'site_mp/base.html' %}
+
+{% block content %}
+    <h1>Create a new Thing</h1>
+    <form method="POST" class="thing-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}
