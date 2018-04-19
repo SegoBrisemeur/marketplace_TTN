@@ -18,7 +18,7 @@ body {
     margin-left: 40px;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, .menu {
     font-family: 'Lobster', cursive;
 }
 
@@ -36,10 +36,8 @@ h1, h2, h3, h4 {
 }
 
 .top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
-    float: right;
-    font-size: 26pt;
-    margin-right: 20px;
+    color: #0072ff;
+    font-size: 20pt;
 }
 
 .thing {

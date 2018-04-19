@@ -1,14 +1,13 @@
 {% extends 'site_mp/base.html' %}
 
 {% block content %}
+
     <div class="thing">
-        {% if thing.edit_date %}
-            <div class="date">
+        <div class="date">
 		Creation: {{thing.created_date}} <br>
-		Edit: {{ thing.edit_date }}
-            </div>
-        {% endif %}
-        <h1>{{ thing.title }}</h1>
+		Last edit: {{ thing.edit_date }}
+        </div>
+        <h1>Announce: {{ thing.title }}</h1>
         <p><b>Description: </b> {{ thing.desc|linebreaksbr }}</p>
     </div>
 {% endblock %}

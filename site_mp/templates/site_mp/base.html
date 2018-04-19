@@ -29,9 +29,10 @@
         	<div class="row">
 
 			<nav class="col-lg-3">
-				<a href="/"><span class="glyphicon glyphicon-home"></span></a> </br>
+				<div class="top-menu">
+				<a href="/"><span class="glyphicon glyphicon-home"></span>  Homepage</a> </br>
 				<a href="{% url 'thing_new' %}"> Create a thing </a> </br>
-				
+				</div>
 			</nav>
 			<section class="col-lg-9">
             			{% block content %}
