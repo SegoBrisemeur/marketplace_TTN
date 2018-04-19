@@ -56,7 +56,7 @@ def thing_edit(request, uidb64, token):
             		thing = form.save(commit=False)
             		thing.edit_date = timezone.now()
             		thing.save()
-            		return redirect('thing_detail', pk=thing.pk)
+            		return redirect('thing_detail', thing.pk)
     	else:
         	form = ThingForm(instance=thing)
     		return render(request, 'site_mp/thing_edit.html', {'form': form})
@@ -75,5 +75,9 @@ def contact_author(request, pk):
     	else:
         	form = MessageForm()
     		return render(request, 'site_mp/message_contact.html', {'form': form})
+
+def delete_thing(request, pk)
+    thing = Thing.objects.get(pk).delete
+    return redirect('/')
 
 

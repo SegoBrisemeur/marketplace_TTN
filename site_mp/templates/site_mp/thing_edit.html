@@ -2,6 +2,9 @@
 
 {% block content %}
     <h1>Create a new Thing</h1>
+
+    <a href="{% url 'delete_thing' %}"> Delete the announce </a> </br>
+
     <form method="POST" class="thing-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
