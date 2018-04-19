@@ -3,6 +3,7 @@ from django.utils import timezone
 from .models import Thing
 from django.shortcuts import render, get_object_or_404
 from .forms import ThingForm
+from .forms import ContactForm
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -60,15 +61,19 @@ def thing_edit(request, uidb64, token):
         	form = ThingForm(instance=thing)
     		return render(request, 'site_mp/thing_edit.html', {'form': form})
 
-
-
-
-
-
-
-
-
-
-
+def contact_author(request, pk):
+	if request.method == "POST":
+		form=MessageForm(request.POST)
+		if form.is_valid():
+			form.save()
+			thing=thing.pk
+			mess = render_to_string('info_message.html',{'text': message.text,'email':message.email_user,})
+	    		to_email = form.cleaned_data.get('thing.email_author')
+	    		email = EmailMessage('You received a message from a user', mess, to=[to_email])
+	    		email.send()
+	    		return redirect('/')
+    	else:
+        	form = MessageForm()
+    		return render(request, 'site_mp/message_contact.html', {'form': form})
 
 

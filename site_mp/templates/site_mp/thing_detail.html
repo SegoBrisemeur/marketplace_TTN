@@ -9,5 +9,6 @@
         </div>
         <h1>Announce: {{ thing.title }}</h1>
         <p><b>Description: </b> {{ thing.desc|linebreaksbr }}</p>
+	<a href="{% url 'message_contact' %}"></a>
     </div>
 {% endblock %}

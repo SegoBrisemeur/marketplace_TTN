@@ -17,3 +17,9 @@ class Thing(models.Model):
 
     def __str__(self):
         return self.title
+
+class Message(models.Model):
+
+    email_user = models.CharField(max_length=200)
+    text = models.TextField()
+
