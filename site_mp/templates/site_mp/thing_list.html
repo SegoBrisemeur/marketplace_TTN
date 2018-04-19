@@ -1,11 +1,10 @@
 {% extends 'site_mp/base.html' %}
 
 	{% block content %}
-		{% for thing in things %}
+		{% for thing in things reversed %}
 			<div class="thing">
+			<div class="date"> Last edit: {{thing.edit_date}} </div>
 			<h1> <a href="{% url 'thing_detail' pk=thing.pk %}"> {{thing.title}} </a> </h1>
-			<div class="date"> Last edit: {{thing.edit_date}} 
-			</div>
 			</div>
 		{% endfor %}
 	{% endblock %}

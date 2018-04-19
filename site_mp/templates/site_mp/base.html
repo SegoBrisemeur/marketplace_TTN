@@ -14,18 +14,29 @@
     <body>
 
 	<div class="page-header">
-		<img src="https://media.mehrnews.com/d/2016/04/30/4/2063559.jpg?ts=1486462047399" style="width: 200px;" />
-        	IoT-ready products & solutions offered by The Things Industries partners.
-		<h1><a href="/">The Things Network Marketplace</a></h1>
-		<a href="{% url 'thing_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+		<div class="container">
+		<div class="row">
+			<div class="col-lg-3"><img src="https://media.mehrnews.com/d/2016/04/30/4/2063559.jpg?ts=1486462047399" style="width: 275px;" /></div>
+        		<div class="col-lg-9">
+				<h1><a href="/">The Things Network Marketplace</a></h1>
+				<h4>IoT-ready products & solutions offered by The Things Industries partners</h4></div>
+		
+		</div>
+		</div>
 
     	</div>
     	<div class="content container">
         	<div class="row">
-            		<div class="col-md-8">
+
+			<nav class="col-lg-3">
+				<a href="/"><span class="glyphicon glyphicon-home"></span></a> </br>
+				<a href="{% url 'thing_new' %}"> Create a thing </a> </br>
+				
+			</nav>
+			<section class="col-lg-9">
             			{% block content %}
             			{% endblock %}
-			</div>
+			</section>
 		</div>
 	</div>
     

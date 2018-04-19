@@ -8,8 +8,6 @@
 		Edit: {{ thing.edit_date }}
             </div>
         {% endif %}
-	<a class="btn btn-default" href="{% url 'thing_edit' pk=thing.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-
         <h1>{{ thing.title }}</h1>
         <p><b>Description: </b> {{ thing.desc|linebreaksbr }}</p>
     </div>
