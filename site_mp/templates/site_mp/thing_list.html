@@ -2,7 +2,7 @@
 
 	{% block content %}
 		{% for thing in things %}
-			<div class="post">
+			<div class="thing">
 			<h1> <a href="{% url 'thing_detail' pk=thing.pk %}"> {{thing.title}} </a> </h1>
 			<div class="date"> Last edit: {{thing.edit_date}} 
 			</div>
