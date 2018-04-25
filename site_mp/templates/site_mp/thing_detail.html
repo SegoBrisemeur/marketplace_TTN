@@ -8,7 +8,10 @@
 		Last edit: {{ thing.edit_date }}
         </div>
         <h1>Announce: {{ thing.title }}</h1>
-        <p><b>Description: </b> {{ thing.desc|linebreaksbr }}</p>
-	<a href="{% url 'message_contact' %}"></a>
+        <p><b>Description: </b> {{ thing.desc|linebreaksbr }}</p> <br> <br>
+	<a href="{% url 'contact_author' pk=thing.pk%}"> Contact the author of the announce</a>
     </div>
 {% endblock %}
+
+
+<h1> <a href="{% url 'thing_detail' pk=thing.pk %}"> {{thing.title}} </a> </h1>

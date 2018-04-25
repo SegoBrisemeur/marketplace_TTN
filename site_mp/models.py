@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 from django.utils import timezone
 
 class Thing(models.Model):
@@ -14,9 +15,6 @@ class Thing(models.Model):
     def edit(self):
         self.edit_date = timezone.now()
         self.save()
-
-    def __str__(self):
-        return self.title
 
 class Message(models.Model):
 
