@@ -7,13 +7,12 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
-from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
-from .tokens import link_token
 from django.core.mail import EmailMessage
+from .token import link_token
 
 
 def thing_list(request):
@@ -33,16 +32,15 @@ def thing_new(request):
             thing.created_date = timezone.now()
             thing.edit_date = timezone.now()
             thing.save()
-            token = default_token_generator.make_token(thing_new)
+            token = link_token.make_token(thing)
             uid = urlsafe_base64_encode(force_bytes(thing.pk))
-            mailtosend = 'Congratulation, your Thing has been created ! \n If you want to edit your announce, please follow the link : https://thing/.####.fr/edit' + str(uid) + '/' + token +'\n\n', send_mail(
-    'Congratulations !',
-    mailtosend,
-    '#### <noreply@####.fr>',
-    [thing.email_author],
-    fail_silently=False,
-)
-            msg = {"CreationThing": "You have created your thing"}
+            mailtosend = 'Congratulation, your Thing has been created ! \n If you want to edit your announce, please follow the link : https://thing/.####.fr/edit' + str(uid) + '/' + token +'\n\n'
+            email = EmailMessage(
+              'Congratulations !',
+              mailtosend,
+              '#### <noreply@####.fr>',
+              '',)
+            email.send()
             return redirect('thing_detail', pk=thing.pk)
     else:
         form = ThingForm()
@@ -76,14 +74,19 @@ def contact_author(request, pk):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            message.save()
-            thing=thing.pk
+            message = form.save()
+            thing=get_object_or_404(Thing, pk=pk)
             mess = render_to_string('info_message.html', {'text': message.text, 'email': message.email_user,})
             to_email = form.cleaned_data.get('thing.email_author')
-            send_mail('Somebody is interested in your thing !', mess, '#### <noreply@####.fr>', [to_email])
+            msg = EmailMessage('Somebody is interested in your thing !', mess, '#### <noreply@####.fr>', '',)
+            msg.content_subtype = "html"
+            msg.send()
             return redirect('/')
     else:
         form = ContactForm()
     return render(request, 'site_mp/message_contact.html', {'form': form}) 
  
+def delete_thing(request, pk): 
+    thing = Thing.objects.get(pk).delete 
+    return redirect('/')
 

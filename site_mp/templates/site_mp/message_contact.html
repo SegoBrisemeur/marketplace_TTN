@@ -1,7 +1,7 @@
 {% extends 'site_mp/base.html' %}
 
 {% block content %}
-    <h1>Contact the creator of the announce</h1>
+    <h1>Contact the creator of the announce</h1> <br>
     <form method="POST" class="message-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="Save" class="save btn btn-default">Send</button>

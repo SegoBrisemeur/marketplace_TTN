@@ -10,5 +10,5 @@ class ThingForm(forms.ModelForm):
 class ContactForm(forms.ModelForm):
 
     class Meta:
-        model: Message
+        model = Message
         fields = ('email_user', 'text')
