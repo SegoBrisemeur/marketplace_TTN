@@ -74,7 +74,7 @@ def thing_edit(request, uid64, token):
 
 def contact_author(request, pk):
     if request.method == "POST":
-        form=ContactForm(request.POST)
+        form = ContactForm(request.POST)
         if form.is_valid():
             message.save()
             thing=thing.pk

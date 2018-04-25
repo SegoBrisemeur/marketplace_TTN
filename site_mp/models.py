@@ -1,5 +1,4 @@
 from django.db import models
-from django.forms import ModelForm
 from django.utils import timezone
 
 class Thing(models.Model):
@@ -20,4 +19,3 @@ class Message(models.Model):
 
     email_user = models.CharField(max_length=200)
     text = models.TextField()
-
