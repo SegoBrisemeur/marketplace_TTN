@@ -3,7 +3,6 @@ from django.utils import timezone
 from .models import Thing, Message
 from .forms import ThingForm
 from .forms import ContactForm
-from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
@@ -32,12 +31,15 @@ def thing_new(request):
             thing.created_date = timezone.now()
             thing.edit_date = timezone.now()
             thing.save()
-            token = link_token.make_token(thing)
-            uid = urlsafe_base64_encode(force_bytes(thing.pk))
-            mailtosend = 'Congratulation, your Thing has been created ! \n If you want to edit your announce, please follow the link : https://thing/.####.fr/edit' + str(uid) + '/' + token +'\n\n'
+            current_site = get_current_site(request)
+            message = render_to_string('link_email.html', {
+                'domain': current_site.domain,
+                'uid':urlsafe_base64_encode(force_bytes(thing.pk)).decode(),
+                'token':link_token.make_token(thing),
+            })
             email = EmailMessage(
               'Congratulations !',
-              mailtosend,
+              message,
               '#### <noreply@####.fr>',
               '',)
             email.send()
@@ -46,7 +48,7 @@ def thing_new(request):
         form = ThingForm()
     return render(request, 'site_mp/thing_new.html', {'form': form})
 
-def thing_edit(request, uid64, token):
+def thing_edit(request, uidb64, token):
 
     token = request.GET.get('token')
     uidb64 = request.GET.get('uidb64')

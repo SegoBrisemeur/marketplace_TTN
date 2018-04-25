@@ -3,7 +3,9 @@
 {% block content %}
     <h1>Edit a new Thing</h1>
 
-    <!--<a href="{% url 'delete_thing' %}"> Delete the announce </a> </br> -->
+    <form action= "{% url 'delete_thing' pk=thing.pk%}">
+        <input type='button' value='bouton'> Delete the announce
+    </form>
 
     <form method="POST" class="thing-form">{% csrf_token %}
         {{ form.as_p }}
